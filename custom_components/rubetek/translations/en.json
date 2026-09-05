@@ -1,0 +1,73 @@
+{
+  "title": "Rubetek MQTT",
+  "config": {
+    "step": {
+      "user": {
+        "title": "Connect to MQTT broker",
+        "description": "Enter the Rubetek MQTT broker address. The integration will connect directly and search for gateways under metering/# for a few seconds.",
+        "data": {
+          "host": "Broker IP address / hostname",
+          "port": "MQTT port",
+          "username": "Username",
+          "password": "Password"
+        }
+      },
+      "gateway": {
+        "title": "Select gateway",
+        "description": "Rubetek gateways were discovered in the metering namespace. Every configured meter_sn will be linked as a child device of the selected gateway.",
+        "data": {
+          "gateway_uuid": "Gateway"
+        }
+      },
+      "manual_gateway": {
+        "title": "Gateway not discovered automatically",
+        "description": "The MQTT connection succeeded, but no metering/# message was received during discovery. Enter the gateway UUID manually.",
+        "data": {
+          "gateway_uuid": "Gateway UUID"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Unable to connect to the MQTT broker.",
+      "invalid_auth": "The MQTT broker rejected the username or password.",
+      "invalid_uuid": "Enter a gateway UUID."
+    },
+    "abort": {
+      "already_configured": "This gateway is already configured in Rubetek MQTT."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Rubetek devices",
+        "menu_options": {
+          "add_device": "Add device",
+          "remove_device": "Remove device"
+        },
+        "menu_option_descriptions": {
+          "add_device": "Add an end meter by device type and meter_sn.",
+          "remove_device": "Remove a previously configured end meter from this gateway."
+        }
+      },
+      "add_device": {
+        "title": "Add device",
+        "description": "A device is identified by its type and final meter_sn. The same physical meter heard by several gateways will not be duplicated.",
+        "data": {
+          "device_type": "Device type",
+          "serial": "Serial number",
+          "name": "Friendly name"
+        }
+      },
+      "remove_device": {
+        "title": "Remove device",
+        "data": {
+          "device": "Device"
+        }
+      }
+    },
+    "error": {
+      "invalid_serial": "Enter a valid positive serial number.",
+      "already_configured": "A device with this type and serial number is already configured."
+    }
+  }
+}

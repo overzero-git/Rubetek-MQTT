@@ -1,0 +1,73 @@
+{
+  "title": "Rubetek MQTT",
+  "config": {
+    "step": {
+      "user": {
+        "title": "Подключение к MQTT брокеру",
+        "description": "Введите адрес MQTT брокера Rubetek. Интеграция подключится напрямую и в течение нескольких секунд выполнит поиск УСПД в ветке metering/#.",
+        "data": {
+          "host": "IP-адрес / имя брокера",
+          "port": "Порт MQTT",
+          "username": "Логин",
+          "password": "Пароль"
+        }
+      },
+      "gateway": {
+        "title": "Выберите УСПД",
+        "description": "Найдены УСПД в MQTT namespace metering. Каждый добавленный meter_sn будет дочерним устройством выбранного УСПД.",
+        "data": {
+          "gateway_uuid": "УСПД"
+        }
+      },
+      "manual_gateway": {
+        "title": "УСПД не обнаружен автоматически",
+        "description": "MQTT подключение успешно, но за время поиска не пришло ни одного сообщения metering/#. Если status не retained, MQTT не умеет перечислять существующие топики. Введите UUID УСПД вручную.",
+        "data": {
+          "gateway_uuid": "UUID УСПД"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Не удалось подключиться к MQTT брокеру.",
+      "invalid_auth": "MQTT брокер отклонил логин или пароль.",
+      "invalid_uuid": "Введите UUID УСПД."
+    },
+    "abort": {
+      "already_configured": "Этот УСПД уже добавлен в Rubetek MQTT."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Устройства Rubetek",
+        "menu_options": {
+          "add_device": "Добавить устройство",
+          "remove_device": "Удалить устройство"
+        },
+        "menu_option_descriptions": {
+          "add_device": "Добавить конечный счётчик по типу и серийному номеру meter_sn.",
+          "remove_device": "Удалить ранее добавленный конечный счётчик из этой УСПД."
+        }
+      },
+      "add_device": {
+        "title": "Добавить устройство",
+        "description": "Устройство идентифицируется по типу и конечному meter_sn. Один и тот же счётчик, услышанный несколькими УСПД, не будет задвоен.",
+        "data": {
+          "device_type": "Тип устройства",
+          "serial": "Серийный номер",
+          "name": "Понятное имя"
+        }
+      },
+      "remove_device": {
+        "title": "Удалить устройство",
+        "data": {
+          "device": "Устройство"
+        }
+      }
+    },
+    "error": {
+      "invalid_serial": "Введите корректный положительный серийный номер.",
+      "already_configured": "Устройство с таким типом и серийным номером уже добавлено."
+    }
+  }
+}
